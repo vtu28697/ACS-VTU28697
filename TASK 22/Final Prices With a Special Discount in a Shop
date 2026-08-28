@@ -1,0 +1,36 @@
+// PROGRAM 
+class Solution {
+    public int[] finalPrices(int[] prices) {
+        int n = prices.length;
+        int[] stack = new int[n];
+        int top = -1;
+
+        for (int i = 0; i < n; i++) {
+
+            // Find the next smaller or equal price
+            while (top >= 0 && prices[stack[top]] >= prices[i]) {
+                int index = stack[top--];
+                prices[index] = prices[index] - prices[i];
+            }
+
+            stack[++top] = i;
+        }
+
+        return prices;
+    }
+}
+
+
+
+Accepted
+Runtime: 0 ms
+Case 1
+Case 2
+Case 3
+Input
+prices =
+[8,4,6,2,3]
+Output
+[4,2,4,2,3]
+Expected
+[4,2,4,2,3]
