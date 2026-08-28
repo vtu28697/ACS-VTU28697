@@ -1,0 +1,49 @@
+//PROGRAM 
+class Solution {
+    public int[] getSumAbsoluteDifferences(int[] nums) {
+        
+        int n = nums.length;
+        int[] result = new int[n];
+
+        // Calculate total sum of all elements
+        int totalSum = 0;
+        for (int num : nums) {
+            totalSum += num;
+        }
+
+        int leftSum = 0;
+
+        for (int i = 0; i < n; i++) {
+            
+            int rightSum = totalSum - leftSum - nums[i];
+
+            // Contribution from elements on the left
+            int leftContribution = nums[i] * i - leftSum;
+
+            // Contribution from elements on the right
+            int rightCount = n - i - 1;
+            int rightContribution = rightSum - nums[i] * rightCount;
+
+            result[i] = leftContribution + rightContribution;
+
+            // Add current element to left sum
+            leftSum += nums[i];
+        }
+
+        return result;
+    }
+}
+
+
+
+Accepted
+Runtime: 0 ms
+Case 1
+Case 2
+Input
+nums =
+[2,3,5]
+Output
+[4,3,5]
+Expected
+[4,3,5]
