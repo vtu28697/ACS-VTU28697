@@ -1,0 +1,46 @@
+#PROGRAM
+import java.util.*;
+
+class Solution {
+    public int leastInterval(char[] tasks, int n) {
+        if (n == 0) {
+            return tasks.length;
+        }
+
+        Map<Character, Integer> taskCounts = new HashMap<>();
+        for (char task : tasks) {
+            taskCounts.put(task, taskCounts.getOrDefault(task, 0) + 1);
+        }
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);
+        pq.addAll(taskCounts.values());
+
+        int time = 0;
+        while (!pq.isEmpty()) {
+            List<Integer> temp = new ArrayList<>();
+            int i = 0;
+            while (i <= n) {
+                if (!pq.isEmpty()) {
+                    int currentTaskCount = pq.poll();
+                    currentTaskCount--;
+                    if (currentTaskCount > 0) {
+                        temp.add(currentTaskCount);
+                    }
+                }
+                time++;
+                if (pq.isEmpty() && temp.isEmpty()) {
+                    break;
+                }
+                i++;
+            }
+            pq.addAll(temp);
+        }
+        return time;
+    }
+}
+#INPUT
+tasks =
+["A","A","A","B","B","B"]
+n = 2
+#OUTPUT
+8
