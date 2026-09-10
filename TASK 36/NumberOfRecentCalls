@@ -1,0 +1,21 @@
+#PROGRAM
+class RecentCounter {
+    private LinkedList<Integer> requests;
+
+    public RecentCounter() {
+        requests = new LinkedList<>();
+    }
+
+    public int ping(int t) {
+        requests.add(t);
+        while (requests.getFirst() < t - 3000) {
+            requests.removeFirst();
+        }
+        return requests.size();
+    }
+}
+#INPUT
+["RecentCounter","ping","ping","ping","ping"]
+[[],[1],[100],[3001],[3002]]
+#OUTPUT
+[null,1,2,3,3]
