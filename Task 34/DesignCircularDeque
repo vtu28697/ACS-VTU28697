@@ -1,0 +1,56 @@
+#PROGRAM
+class MyCircularDeque {
+    private int[] deque;
+    private int front;
+    private int rear;
+    private int size;
+    private int capacity;
+
+    public MyCircularDeque(int k) {
+        capacity = k;
+        deque = new int[k];
+        front = 0;
+        rear = 0;
+        size = 0;
+    }
+
+    public boolean insertFront(int value) {
+        if (isFull()) {
+            return false;
+        }
+        front = (front - 1 + capacity) % capacity;
+        deque[front] = value;
+        size++;
+        … }
+        rear = (rear - 1 + capacity) % capacity;
+        size--;
+        return true;
+    }
+
+    public int getFront() {
+        if (isEmpty()) {
+            return -1;
+        }
+        return deque[front];
+    }
+
+    public int getRear() {
+        if (isEmpty()) {
+            return -1;
+        }
+        return deque[(rear - 1 + capacity) % capacity];
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public boolean isFull() {
+        return size == capacity;
+    }
+}
+#INPUT
+["MyCircularDeque","insertLast","insertLast","insertFront","insertFront","getRear","isFull","deleteLast","insertFront","getFront"]
+[[3],[1],[2],[3],[4],[],[],[],[4],[]]
+#OUTPUT
+[null,true,true,true,false,2,true,true,true,4]
